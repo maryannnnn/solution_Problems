@@ -1,0 +1,54 @@
+class Solution {
+    List<Integer> stonesList;
+    
+    public int lastStoneWeight(int[] stones) {
+        if (stones.length == 1) return stones[0];
+        stonesList = new ArrayList<>();
+        for(int i = 0; i < stones.length; i++) {
+            stonesList.add(stones[i]);
+        }
+        return LastStoune();
+    }
+
+    public int LastStoune() {
+        
+        int latStouneOne;
+        int maxFirstIndex = 0;
+        int maxSecondIndex = stonesList.size() - 1;
+        
+        Integer Max = 0;
+        for(int i = 0; i < stonesList.size(); i++) {
+            if (stonesList.get(i) >= Max) {
+                Max = stonesList.get(i);
+                maxFirstIndex = i;
+            }
+        }
+        Max = 0;
+        for(int i = 0; i < stonesList.size(); i++) {
+            if (stonesList.get(i) >= Max && i != maxFirstIndex) {
+                Max = stonesList.get(i);
+                maxSecondIndex = i;
+            }
+        }
+        if (stonesList.size() == 2) maxSecondIndex = Math.abs(maxFirstIndex - 1);
+        
+        if (stonesList.get(maxFirstIndex).equals(stonesList.get(maxSecondIndex))) {
+            stonesList.remove(maxFirstIndex);
+            if (stonesList.size() == 1) {
+                stonesList.remove(0);
+            } else stonesList.remove(maxSecondIndex);
+
+        } else {
+            stonesList.set(maxFirstIndex, stonesList.get(maxFirstIndex) - stonesList.get(maxSecondIndex));
+            stonesList.remove(maxSecondIndex);
+        }
+        if(stonesList.size() == 1) {
+            latStouneOne = stonesList.get(0);
+        } else if (stonesList.size() == 0) {
+            latStouneOne = 0;
+        } else {
+            latStouneOne = LastStoune();
+        }
+        return latStouneOne;
+    }
+}
