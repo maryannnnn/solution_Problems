@@ -1,0 +1,22 @@
+class Solution {
+    Map<String, String> literaMap = new HashMap<>();
+    public int uniqueMorseRepresentations(String[] words) {
+        String[] morzStr = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        String[] literStr = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+        for (int i = 0; i < literStr.length; i++) literaMap.put(literStr[i], morzStr[i]);
+        Set<String> resultUnicStr = new HashSet<>();
+        for (String elem: words) resultUnicStr.add(konkatinacWord(elem));
+        return resultUnicStr.size();
+    }
+
+    public String konkatinacWord(String wordElem) {
+     //   System.out.println("wordElem: " + wordElem);
+        String resultMorze = "";
+        for (int i = 0; i < wordElem.length(); i++) {
+            int t = i + 1;
+            resultMorze = resultMorze + literaMap.get(wordElem.substring(i, t));
+        }
+     //   System.out.println("resultMorze: " + resultMorze);
+        return resultMorze;
+    }
+}
