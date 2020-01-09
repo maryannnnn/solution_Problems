@@ -1,0 +1,18 @@
+class Solution {
+    public static int peakIndexInMountainArray(int[] A) {
+        if (A.length == 0 || A.length == 1 || A.length == 2) return 0;
+        return BinarySearch(A, (A.length - 1) / 2, 0, A.length - 1);
+    }
+
+    public static int BinarySearch(int[] A, int i, int left, int right) {
+        System.out.println(i);
+        if (i + 1 < A.length && i - 1 >= 0) {
+            if (A[i] < A[i + 1] && A[i] > A[i - 1]) {
+                return BinarySearch(A,  i + (right - i) / 2, i, right);
+            } else if (A[i] > A[i + 1] && A[i] < A[i - 1]) {
+                return BinarySearch(A, left + (i - left)/ 2, left, i);
+            }
+        }
+        return i;
+    }
+}
