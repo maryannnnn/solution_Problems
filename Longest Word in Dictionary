@@ -1,0 +1,79 @@
+class Solution {
+   List<String> wordList;
+    String resultStr;
+
+    public class SortList implements Comparator<String> {
+        public int compare(String one, String two) {
+            return two.length() - one.length();
+        }
+    }
+
+    public String longestWord(String[] words) {
+        if (words.length == 0) return resultStr;
+        if (words.length == 1) return words[0];
+        int indexFinish = 0;
+        int maxStrlength = 0;
+      
+        String maxStrFull = "";
+        TreeSet<String> maxStrSet = new TreeSet<>();
+        int indCikl = 0;
+        SortList sortListStr = new SortList();
+        wordList = new ArrayList<>();
+        for (String elem: words) wordList.add(elem);
+        Collections.sort(wordList, sortListStr);
+ 
+        while (indexFinish != 1) {
+            resultStr = findMaxStr();
+            if (resultStr == "") indexFinish = 1;
+            if (indCikl == 0) {
+                maxStrlength = resultStr.length();
+                indCikl = 1;
+            }
+
+            if (resultStr.length() == maxStrlength)  {
+
+                maxStrSet.add(resultStr);
+           
+                if (wordList.size() != 0) {
+                    wordList.remove(resultStr);
+                } else return maxStrSet.first();
+
+            } else if (resultStr.length() < maxStrlength || resultStr == "")  {
+                indexFinish = 1;
+            }
+        }
+   
+        return maxStrSet.size() != 0 ? maxStrSet.first() : maxStrFull;
+    }
+
+    public String findMaxStr() {
+        for (String elem: wordList) {
+            String tmpStr = (String) elem;
+     
+            if(checkStr(tmpStr) == true) {
+                return tmpStr;
+            }
+        }
+        return "";
+    }
+
+    public boolean checkStr(String fullStr) {
+  
+        int leng = fullStr.length();
+        for (int i = leng; i > 0; i--) {
+
+            if(checkElementStr(fullStr.substring(0, i)) == false) return false;
+        }
+        return true;
+    }
+
+    public boolean checkElementStr(String partStr) {
+     
+        if(wordList.contains(partStr) == true) {
+          
+            return true;
+        }
+        return false;
+    }
+
+}
