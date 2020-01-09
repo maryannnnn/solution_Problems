@@ -1,0 +1,68 @@
+import java.security.KeyStore;
+import java.util.*;
+import java.util.stream.Collectors;
+
+
+public class State {
+        public static String byState(String str) {
+        str = str.replace(",", "");
+        Map<String,String> mapState = new HashMap<>();
+        Map<String, List<String>> mapStateAdress = new HashMap<String, List<String>>();
+        mapState.put("AZ", "Arizona");
+        mapState.put("CA", "California");
+        mapState.put("ID", "Idaho");
+        mapState.put("IN", "Indiana");
+        mapState.put("MA", "Massachusetts");
+        mapState.put("OK", "Oklahoma");
+        mapState.put("PA", "Pennsylvania");
+        mapState.put("VA", "Virginia");
+        int i = 0;
+        for (int j = i; j < str.length()-1; j++) {
+            if (mapState.containsKey(str.substring(j, j + 2))) {
+                String stateShort = str.substring(j, j + 2);
+                String subString = str.substring(i, j + 2);
+                String stateLong = mapState.get(stateShort);
+                String subStringFull = subString.replace(stateShort, stateLong);
+                if (mapStateAdress.containsKey(stateLong)) {
+                    List<String> tmpListStringFull = mapStateAdress.get(stateLong);
+                    tmpListStringFull.add(subStringFull);
+                    mapStateAdress.put(stateLong, tmpListStringFull);
+                } else {
+                    List<String> tmpListStringFull2 = new ArrayList<>();
+                    tmpListStringFull2.add(subStringFull);
+                    mapStateAdress.put(stateLong, tmpListStringFull2);
+                }
+                i = j + 3;
+            }
+        }
+            // Sort Key
+        List<Map.Entry<String, List<String>>> sortKeylist = new ArrayList(mapStateAdress.entrySet());
+        Collections.sort(sortKeylist, new Comparator<Map.Entry<String, List<String>>>() {
+            public int compare(Map.Entry<String, List<String>> o2, Map.Entry<String, List<String>> o1) {
+                return (o2.getKey()).compareTo(o1.getKey());
+            }
+        });
+            // Sort Value
+        Map<String, List<String>> sortmapStateAdress = new LinkedHashMap<String, List<String>>();
+        for (Map.Entry<String, List<String>> entry : sortKeylist) {
+            List<String> sortListValue = entry.getValue();
+            Collections.sort(sortListValue, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.toString().compareTo(o2.toString());
+                }
+            });
+            sortmapStateAdress.put(entry.getKey(), sortListValue);
+        }
+            //String Result
+        String strResult = "";
+        for (Map.Entry<String, List<String>> entry: sortmapStateAdress.entrySet()) {
+            strResult = strResult + " " + entry.getKey() + "\n";
+            List<String> printList = entry.getValue();
+            for (String elem: printList) {
+                strResult = strResult + "..... " + elem  + "\n";
+            }
+        }
+        return strResult.substring(1, strResult.length() - 1);
+    }
+}
