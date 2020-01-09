@@ -1,0 +1,46 @@
+public class Solution{
+  public static String[] streetFighterSelection(String[][] fighters, int[] position, String[] moves){
+        String[] result = new String[moves.length];
+        int row = position[0];
+        int colomn = position[1];
+        for (int i = 0; i < moves.length; i++) {
+            switch (moves[i]) {
+                case "up":
+                    if (row == 0) {
+                        result[i] = fighters[row][colomn];
+                    } else {
+                        row--;
+                        result[i] = fighters[row][colomn];
+                    }
+                    break;
+                case "down":
+                    if (row == fighters.length-1) {
+                        result[i] = fighters[row][colomn];
+                    } else {
+                        row++;
+                        result[i] = fighters[row][colomn];
+                    }
+                    break;
+                case "left":
+                    if (colomn == 0) {
+                        colomn = fighters[0].length-1;
+                        result[i] = fighters[row][colomn];
+                    } else {
+                        colomn--;
+                        result[i] = fighters[row][colomn];
+                    }
+                    break;
+                case "right":
+                    if (colomn == fighters[0].length-1) {
+                        colomn = 0;
+                        result[i] = fighters[row][colomn];
+                    } else {
+                        colomn++;
+                        result[i] = fighters[row][colomn];
+                    }
+                    break;
+            }
+        }
+        return result;
+    }
+}
