@@ -1,0 +1,48 @@
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+class Solution {
+  int[] nums;
+  int[] resetArr;
+   
+
+    public Solution(int[] nums) {
+        this.nums = nums;
+        resetArr = nums.clone();
+    }
+
+    /** Resets the array to its original configuration and return it. */
+    public int[] reset() {
+        
+        return  resetArr;
+    }
+
+    /** Returns a random shuffling of the array. */
+   public int[] shuffle() {
+       if (nums.length == 0) return  nums;
+        int[] tmp = nums.clone();
+        int randomOne = 1 + (int) (Math.random() * (nums.length));
+        int randomTwo = 1 + (int) (Math.random() * (nums.length));
+        if (randomOne == randomTwo) {
+            randomTwo = 1 + (int) (Math.random() * (nums.length));
+        }
+        randomOne--;
+        randomTwo--;
+        int tmpSpec = nums[randomOne];
+        nums[randomOne] = nums[randomTwo];
+        nums[randomTwo] = tmpSpec;
+        if (Arrays.equals(nums, tmp)) nums = shuffle();
+        return nums;
+    }
+}
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(nums);
+ * int[] param_1 = obj.reset();
+ * int[] param_2 = obj.shuffle();
+ */
