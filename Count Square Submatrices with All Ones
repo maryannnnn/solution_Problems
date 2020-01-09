@@ -1,0 +1,49 @@
+class Solution {
+   Set<String> resultSet = new HashSet<>();
+    public int countSquares(int[][] matrix) {
+        int j = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            countOne(i, j, matrix);
+        }
+        return resultSet.size();
+    }
+
+    public void countOne(int x, int y, int[][] matrix) {
+        if (matrix[x][y] == 1) {
+            String tmp = Integer.toString(x) + " " + Integer.toString(x) + " " + Integer.toString(y) + " " + Integer.toString(y);
+            //          System.out.println("tmp" + tmp);
+            resultSet.add(tmp);
+            int xNext = x + 1;
+            int yNext = y + 1;
+            if(xNext < matrix.length && yNext < matrix[0].length) {
+                countLocalSquareas(x, xNext, y, yNext, matrix);
+            }
+        }
+        int yNextOne = y + 1;
+        if (yNextOne < matrix[0].length) {
+            countOne(x, yNextOne, matrix);
+        } else return;
+    }
+
+    public void countLocalSquareas(int x1, int x2, int y1, int y2, int[][] matrix) {
+        if (checkOne(x1, x2, y1, y2, matrix)) {
+            int xNext = x2 + 1;
+            int yNext = y2 + 1;
+            if(xNext < matrix.length && yNext < matrix[0].length) {
+                countLocalSquareas(x1, xNext, y1, yNext, matrix);
+            }
+        } else return;;
+    }
+
+    public boolean checkOne(int x1, int x2, int y1, int y2, int[][] matrix) {
+        for (int i = x1; i <= x2; i++) {
+            for (int j = y1; j <= y2; j++) {
+                if (matrix[i][j] == 0) return false;
+            }
+        }
+        String tmp = Integer.toString(x1) + " " + Integer.toString(x2) + " " + Integer.toString(y1) + " " + Integer.toString(y2);
+        resultSet.add(tmp);
+        //      System.out.println("tmp" + tmp);
+        return true;
+    }
+}
