@@ -1,0 +1,57 @@
+import java.math.BigInteger;
+
+class Solution {
+    
+   public static int climbStairs(int n) {
+        int result = 1;
+        int MinEl2 = 0;
+        int MinElno2 = 0;
+        int MaxEl = n;
+        if (n % 2 == 0) {
+            MinEl2 = n / 2;
+            int k1 = 0;
+            int j2 = MinEl2;
+            for (int i = MinEl2 + 1; i < MaxEl; i++)  {
+                BigInteger up = factorial(i);
+                j2 = j2 - 1;
+                BigInteger down2 = factorial(j2);
+                k1 = k1 + 2;
+                System.out.println("j2: " + j2 + " k1: " + k1);
+                BigInteger down1 = factorial(k1);
+                BigInteger down = down1.multiply(down2);
+                BigInteger elFact = up.divide(down);
+                int elInt = elFact.intValue();
+                result = result + elInt;
+                System.out.println("i: " + i + " fact: " + elInt);
+                System.out.println("res: " + result);
+            }
+            result = result + 1;
+        } else {
+            MinElno2 = ((n - 1) / 2) + 1;
+            int k1 = 1;
+            int j2 = MinElno2;
+            for (int i = MinElno2; i < MaxEl; i++)  {
+                BigInteger up = factorial(i);
+                j2 = j2 - 1;
+                BigInteger down2 = factorial(j2);
+                BigInteger down1 = factorial(k1);
+                k1 = k1 + 2;
+                BigInteger down = down1.multiply(down2);
+                BigInteger elFact = up.divide(down);
+                int elInt = elFact.intValue();
+                result = result + elInt;
+                System.out.println("i: " + i + " fact: " + elInt);
+                System.out.println("res: " + result);
+            }
+
+        }
+        return result;
+    }
+
+    public static BigInteger factorial(int num){
+        if (num<=1)
+            return BigInteger.ONE;
+        else
+            return factorial(num-1).multiply(BigInteger.valueOf(num));
+    }
+}
