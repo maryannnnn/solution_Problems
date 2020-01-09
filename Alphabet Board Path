@@ -1,0 +1,47 @@
+class Solution {
+    public String alphabetBoardPath(String target) {
+   String[] board = new String[6];
+        board[0] = "abcde"; board[1] = "fghij"; board[2] = "klmno"; board[3] = "pqrst"; board[4] = "uvwxy"; board[5] = "z";
+        int prevX = 0;
+        int prevY = 0;
+        String result = "";
+        int[] koord = new int[2];
+        for (int i = 0; i < target.length(); i++) {
+            for (int t = 0; t < 6; t++) {
+                for (int p = 0; p < board[t].length(); p++) {
+                    if (board[t].toCharArray()[p] == target.toCharArray()[i]) {
+                        koord[0] = t;
+                        koord[1] = p;
+                    }
+                }
+            }
+            int vert = koord[0] - prevX;
+            int goriz = koord[1] - prevY;
+            if (target.toCharArray()[i] == 'z' && (vert != 0 && goriz != 0)) {
+                if (vert > 0) {
+                    for (int k = 0; k < Math.abs(vert) - 1; k++) result = result + 'D';
+                }
+                if (goriz < 0) {
+                    for (int k = 0; k < Math.abs(goriz); k++) result = result + 'L';
+                }    
+                    result = result + 'D';
+            } else {
+                if (vert > 0) {
+                    for (int k = 0; k < Math.abs(vert); k++) result = result + 'D';
+                } else if (vert < 0) {
+                    for (int k = 0; k < Math.abs(vert); k++) result = result + 'U';
+                }
+                if (goriz > 0) {
+                    for (int k = 0; k < Math.abs(goriz); k++) result = result + 'R';
+                } else if (goriz < 0) {
+                    for (int k = 0; k < Math.abs(goriz); k++) result = result + 'L';
+                }
+            }
+            result = result + '!';
+            prevX = koord[0];
+            prevY = koord[1];
+        }
+    return result;
+    
+    }
+}
