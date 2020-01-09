@@ -1,0 +1,6 @@
+class Solution {
+    public int numJewelsInStones(String J, String S) {
+       int count = S.length() - S.replaceAll(  "[" + J + "]","").length();
+     return count;   
+    }
+}
