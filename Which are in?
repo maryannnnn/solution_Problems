@@ -6,13 +6,13 @@ public class WhichAreIn {
             List<String> list1 = new ArrayList<String>(Arrays.asList(array1));
             List<String> list2 = new ArrayList<String>(Arrays.asList(array2));
             List<String> list3 = new ArrayList<>();
-            for (String element1 : list1) {
+                for (String element1 : list1) {
                 int index = 0;
-                for (String element2 : list2) {
-                    if(element2.contains(element1) == true) index = 1;
+                    for (String element2 : list2) {
+                        if(element2.contains(element1) == true) index = 1;
+                    }
+                        if (index == 1) list3.add(element1);
                 }
-                    if (index == 1) list3.add(element1);
-            }
             Set unsortedSet = new HashSet(list3);
             Set<String> sortedSet = new TreeSet<String>(new Comparator<String>() {
                 public int compare(String o1, String o2) {
@@ -24,4 +24,4 @@ public class WhichAreIn {
             return array5;
     }
     
-} 
+}
