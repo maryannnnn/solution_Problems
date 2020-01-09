@@ -1,0 +1,18 @@
+public class Kata
+{
+    public static int[] countPositivesSumNegatives(int[] input)
+    {
+        int[] resultEmpty = {};
+        if ((input == null) || (input.length == 0)) return resultEmpty;
+        int[] result = {0, 0};
+        int countPoitiv = 0;
+        int summNegotiv = 0;
+        for (int i=0; i < input.length; i++ ) {
+            if (input[i] > 0) countPoitiv ++;
+            if (input[i] < 0) summNegotiv = summNegotiv + input[i];
+        }
+        result[0] = countPoitiv;
+        result[1] = summNegotiv;
+        return result;
+    }
+}
