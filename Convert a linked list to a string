@@ -1,0 +1,12 @@
+public class Kata {
+
+  public static String stringify(Node list) {
+      String result = "";
+        while (list != null) {
+            result = result + list.getData() + " -> ";
+            list = list.getNext();
+        }
+        return result + "null";
+  }
+
+}
