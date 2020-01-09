@@ -1,0 +1,40 @@
+class Solution {
+public static int[] sortedSquares(int[] A) {
+        if (A.length == 0) return A;
+        if (A.length == 1) {
+            A[0] = (int) Math.pow(Math.abs(A[0]), 2);
+            return A;
+        }
+        int i;
+        int j;
+        List<Integer> listA = Arrays.stream(A).boxed().collect(Collectors.toList());
+
+    for (i = 0; i < listA.size(); i++) {
+
+        Integer valueA = listA.get(i);
+        if (listA.get(i) < 0) {
+            Integer tmp = Math.abs(valueA);
+            for (j = 0; j < listA.size(); j++) {
+                
+                if (listA.get(j) >= tmp) {
+                    listA.remove(i);
+                    
+                    listA.add(j - 1, tmp);
+                
+                break;
+                }
+            }
+            if (j == listA.size()) {
+                listA.remove(i);
+                listA.add(tmp);
+            }
+            i--;
+        } else {
+            listA.set(i, valueA * valueA);
+            
+        }
+    }
+        Integer[] RusultArr = listA.stream().toArray((IntFunction<Integer[]>) Integer[]::new);
+        return Arrays.stream(RusultArr).mapToInt(k->k).toArray();
+    }
+}
