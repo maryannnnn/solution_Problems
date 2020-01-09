@@ -1,0 +1,66 @@
+class MyHashMap {
+    List<int[]> mapList = new ArrayList<>();
+    //** Initialize your data structure here. *//
+    public MyHashMap() {
+
+    }
+
+    //** value will always be non-negative. *//
+    public void put(int key, int value) {
+        if(mapList.size() != 0) {
+            int index = 0;
+            for(int i = 0; i < mapList.size(); i++) {
+                int[] tmp = mapList.get(i);
+                if(tmp[0] == key) {
+                    tmp[1] = value;
+                    mapList.set(i, tmp);
+                    index = 1;
+                }
+                if(index == 1) break;;
+            }
+            if(index == 0) {
+                int[] mapStr = new int[2];
+                mapStr[0] = key;
+                mapStr[1] = value;
+                mapList.add(mapStr);
+            }
+        } else {
+            int[] mapStr = new int[2];
+            mapStr[0] = key;
+            mapStr[1] = value;
+            mapList.add(mapStr);
+        }
+    }
+
+    //** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    public int get(int key) {
+        if(mapList.size() == 0) return -1;
+        for(int i = 0; i < mapList.size(); i++) {
+            int[] tmp = mapList.get(i);
+            if(tmp[0] == key) return tmp[1];
+        }
+        return -1;
+    }
+
+    //** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    public void remove(int key) {
+        int index = 0;
+        for(int i = 0; i < mapList.size(); i++) {
+            int[] tmp = mapList.get(i);
+            if(tmp[0] == key) {
+                mapList.remove(i);
+                index = 1;
+            }
+            if(index == 1) break;;
+        }
+    }
+}
+
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */
