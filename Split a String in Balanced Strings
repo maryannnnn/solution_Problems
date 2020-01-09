@@ -1,0 +1,35 @@
+class Solution {
+  public static int balancedStringSplit(String s) {
+        if (s.length() == 0 || s.length() == 1) return 0;
+        int count = 0;
+    return balanced(s, count, 0);
+    }
+
+    public static int balanced(String s, int count, int start) {
+        int countL = 0;
+        int countR = 0;
+        if (s.charAt(start) == 'L') {
+            countL++;
+        } else countR++;
+        for (int i = start; i < s.length(); i++) {
+            int k = i + 1;
+            if (k != s.length()) {
+                for (int j = k; j < s.length(); j++) {
+                    int strJ = j + 1;
+                    String subStr = s.substring(start,strJ);
+                    if (s.charAt(j) == 'L') {
+                        countL++;
+                    } else countR++;
+                    if (countL == countR) {
+                        count++;
+                        start = j + 1;
+                        if (start != s.length()) {
+                            return balanced(s, count, start);
+                        } else return count;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+}
