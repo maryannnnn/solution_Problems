@@ -1,0 +1,14 @@
+class Node{
+  public int data;
+  public Node next = null;
+  
+  public static int getNth(Node n, int index) throws Exception{
+      Node listPrev = null;
+            for (int i = 0; i <= index; i++) {
+                listPrev = n;
+                n = n.next;
+            }
+        int result = listPrev.data;
+        return result;
+  }
+}
