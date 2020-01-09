@@ -1,0 +1,71 @@
+import java.text.DecimalFormat;
+
+public class EasyBal {
+         public static String balance(String book)  {
+        String str = book;
+        String strTmp = "";
+        String strResult = "Original Balance: ";
+        str = str.replace("\n", " ");
+        for (int i = 0; i < str.length(); i++) {
+            int asciiStr = (int) str.toCharArray()[i];
+            if (((47 < asciiStr) && (asciiStr < 58) || ((64 < asciiStr) && (asciiStr < 91)) || ((96 < asciiStr) && (asciiStr < 123)) || asciiStr == 46 || asciiStr == 32) == true) {
+                strTmp = strTmp + str.toCharArray()[i];
+            }
+        }
+        strTmp = strTmp.replace("  ", " ");
+        System.out.println(strTmp);
+        strTmp = strTmp + strResult.toCharArray()[8];
+        String formattedDouble = "";
+        String formattedTotal = "";
+        String formattedAverage = "";
+        String strBalance = " Balance";
+        String strTotal = "Total expense";
+        String strAverage = "Average expense";
+        String format = "#0.00";
+        Double Balance = 0.00;
+        Double Total = 0.00;
+        Double Average = 0.00;
+        int countProduct = 0;
+        int t = 0;
+        int control = 0;
+        int count = 0;
+        int countEmpty = 0;
+        for (int j = 0; j < strTmp.length(); j++) {
+                if (strTmp.toCharArray()[j] == strResult.toCharArray()[8]) {
+                    String strTmpProcess = strTmp.substring(t, j);
+                    System.out.println("Schitali " + strTmpProcess);
+                    if (count == 0) {
+                        strResult = strResult + strTmpProcess;
+                    } else strResult = strResult + " " + strTmpProcess;
+
+                    if (control == 0) {
+                        try {
+                            Balance = Double.valueOf(strTmpProcess);
+                        } catch (Exception e) {
+                        }
+                        strResult = strResult + "\\r" + "\\n";
+                        control = 1;
+                        count = -1;
+                    }
+                    if (count == 2) {
+                        try {
+                            Balance = Balance - Double.valueOf(strTmpProcess);
+                            Total = Total + Double.valueOf(strTmpProcess);
+                            formattedDouble = new DecimalFormat(format).format(Balance);
+                        } catch (Exception e) {
+                        }
+                        strResult = strResult + strBalance + " " + formattedDouble + "\\r" + "\\n";
+                        countProduct++;
+                        count = -1;
+                    }
+                    count++;
+                    t = j+1;
+                }
+        }
+        formattedTotal = new DecimalFormat(format).format(Total);
+        formattedAverage = new DecimalFormat(format).format(Total/countProduct);
+        strResult = strResult + strTotal + "  " + formattedTotal + "\\r" + "\\n" + strAverage + "  " + formattedAverage;
+        strResult = strResult.replace(",",".");
+        return strResult;
+    }
+}
