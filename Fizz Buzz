@@ -1,0 +1,24 @@
+class Solution {
+    public static void main(String[] args) {
+        System.out.println(fizzBuzz(23));
+    }
+    public static List<String> fizzBuzz(int n) {
+        if (n == 0) return null;
+        List<String> resultList = new ArrayList<>();
+        for (int i = 1; i <= n; i++){
+            String str = String.valueOf(i);
+            int sum = 0;
+            for (int j = 0; j < str.length(); j++) sum = sum + Character.getNumericValue(str.charAt(j));
+            if ((str.charAt(str.length() - 1) == '0' || str.charAt(str.length() - 1) == '5') && (sum%3 == 0)) {
+                resultList.add("FizzBuzz");
+            } else if (sum%3 == 0) {
+                resultList.add("Fizz");
+            } else if (str.charAt(str.length() - 1) == '0' || str.charAt(str.length() - 1) == '5'){
+                resultList.add("Buzz");
+            } else {
+                resultList.add(String.valueOf(i));
+            }
+        }
+    return  resultList;
+    }
+}
