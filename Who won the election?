@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class BallotsCounter {
+
+    public static String getWinner(final List<String> listOfBallots) {
+        String result = null;
+        int Max = 0;
+        int count = 0;
+        Map<String, Integer> votesMap = new HashMap<>();
+        for (String elem: listOfBallots) {
+            if (votesMap.containsKey(elem)) {
+                count = votesMap.get(elem) + 1;
+                if (count > Max) {
+                    Max = count;
+                    result = elem;
+                }
+            } else {
+                count = 1;
+                if (count > Max) {
+                    Max = count;
+                    result = elem;
+                }
+            }
+            votesMap.put(elem, count);
+        }
+        return Max > listOfBallots.size() / 2 ? result : null;
+    }
+}
