@@ -1,0 +1,49 @@
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+class Solution {
+ public static int numEquivDominoPairs(int[][] dominoes) {
+        return elementDominoPair(dominoes,0);
+    }
+
+    public static int elementDominoPair(int[][] arr, int resultCountPair) {
+        List<Integer> indexList = new ArrayList<>();
+        int countItem = 1;
+        indexList.add(0);
+        if (0 < arr.length) {
+            for (int j = 1; j < arr.length; j++) {
+                if ((arr[0][0] == arr[j][0] && arr[0][1] == arr[j][1]) || (arr[0][0] == arr[j][1] && arr[0][1] == arr[j][0])) {
+                    countItem++;
+                    indexList.add(j);
+                }
+            }
+        }
+        if (countItem > 2) {
+            BigInteger up = factorial(countItem);
+            BigInteger down = factorial(countItem - 2).multiply(BigInteger.valueOf(2));
+            BigInteger pair = up.divide(down);
+            int pairInt = pair.intValue();
+            resultCountPair = resultCountPair + pairInt;
+        } else if (countItem == 2) resultCountPair = resultCountPair + 1;
+        int sizeArr = arr.length - indexList.size();
+        if (sizeArr > 0) {
+            int[][] arrIn = new int[sizeArr][2];
+            int k = 0;
+            for (int i = 0; i < arr.length; i++) {
+                if (indexList.contains(i) == false) {
+                    for (int j = 0; j < 2; j++) arrIn[k][j] = arr[i][j];
+                    k++;
+                }
+            }
+            resultCountPair = elementDominoPair(arrIn, resultCountPair);
+        }
+        return  resultCountPair;
+    }
+
+    public static BigInteger factorial(int num){
+        if (num<=1)
+            return BigInteger.ONE;
+        else
+            return factorial(num-1).multiply(BigInteger.valueOf(num));
+    }
+}
