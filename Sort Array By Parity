@@ -1,0 +1,29 @@
+class Solution {
+     int k;
+  public int[] sortArrayByParity(int[] A) {
+        int j;
+        for (int i = k; i < A.length; i++) {
+            if (A[i] % 2 != 0) {
+             //   System.out.println("No chet: " + A[i]);
+                int t = i + 1;
+                if (t < A.length) {
+                    for (j = t; j < A.length; j++) {
+                        if (A[j] % 2 == 0) {
+                        //    System.out.println("chet: " + A[j]);
+                            int tmp = A[i];
+                            A[i] = A[j];
+                            A[j] = tmp;
+                       //     System.out.println(Arrays.toString(A));
+                            if (i < A.length) {
+                                k = i;
+                                return sortArrayByParity(A);
+                            } else return A;
+                        }
+                    }
+                    return A;
+                } else return A;
+            }
+        }
+        return A;
+    }
+}
