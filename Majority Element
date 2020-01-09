@@ -1,0 +1,18 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+        if(nums.length == 0) return 0;
+        if (nums.length == 1) return nums[0];
+        Map<Integer, Integer> mapEl = new HashMap<>();
+        for(int elem: nums) {
+            if(mapEl.containsKey(elem)) {
+                int tmpMapValue = mapEl.get(elem);
+                tmpMapValue = tmpMapValue + 1;
+                if(tmpMapValue > nums.length / 2) return elem;
+                mapEl.put(elem, tmpMapValue);
+            } else {
+                mapEl.put(elem, 1);
+            }
+        }
+    return 0;
+    }
+}
