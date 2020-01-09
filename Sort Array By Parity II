@@ -1,0 +1,44 @@
+class Solution {
+    public int[] sortArrayByParityII(int[] A) {
+        if(A.length == 0) {
+            return A;
+        }
+        return sortArray(A, 0);
+    }
+
+    public int[] sortArray(int[] A, int i) {
+            if((A[i] % 2 == 0 && i % 2 == 0) || (A[i] % 2 != 0 && i % 2 != 0)) {
+                int t = i + 1;
+                if(t != A.length) {
+                    return sortArray(A, t);  
+                }
+            } else if(A[i] % 2 == 0 && i % 2 != 0) {
+                int t = i + 1;
+                if(t != A.length) {
+                    for (int j = t; j < A.length; j++) {
+                        if (A[j] % 2 != 0 && j % 2 == 0) {
+                            int tmp = A[j];
+                            A[j] = A[i];
+                            A[i] = tmp;
+                            int p = i + 1;
+                            return sortArray(A, p);
+                        }
+                    }
+                }
+            } else if(A[i] % 2 != 0 && i % 2 == 0) {
+                int t = i + 1;
+                if(t != A.length) {
+                    for (int j = t; j < A.length; j++) {
+                        if (A[j] % 2 == 0 && j % 2 != 0) {
+                            int tmp = A[j];
+                            A[j] = A[i];
+                            A[i] = tmp;
+                            int p = i + 1;
+                            return sortArray(A, p);
+                        }
+                    }
+                }
+            }
+        return A;
+    }
+}
