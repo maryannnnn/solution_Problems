@@ -1,0 +1,31 @@
+class Solution {
+ public int findJudge(int N, int[][] trust) {
+       if(trust.length == 0 || N == 1) return 1;
+        for(int i = 1; i <= N; i++) {
+            int result = find(i, trust, N);
+            if(result != -1) return result;
+        }
+        return -1;
+    }
+
+    public int find(int T, int[][] trust, int N) {
+        List<Integer> indexList = new ArrayList<>();
+        Integer ind = 0;
+        for (int j = 0; j < N; j++) {
+            ind = ind + 1;
+            indexList.add(ind);
+        }
+        for(int i = 0; i < trust.length; i++) {
+            if(trust[i][0] == T) return -1;
+            if(trust[i][1] == T) {
+                Integer tmp = trust[i][0];
+                int indexRem = indexList.indexOf(tmp);
+                if (indexList.contains(tmp)) {
+                    indexList.remove(indexRem);
+                   }
+            }
+        }
+        if(indexList.size() == 1 && indexList.get(0) == T) return T;
+        return -1;
+    }
+}
