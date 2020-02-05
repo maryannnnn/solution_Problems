@@ -1,0 +1,57 @@
+class Solution {
+    public int[][] diagonalSort(int[][] mat) {
+        int n = mat.length;
+        int m = mat[0].length;
+        if (n == 1 && m == 1) return mat;
+        
+     for (int i = n - 2; i >= 0; i--) {
+         int p = 0;
+         for (int k = i; k < n; k++) {
+             int Min = mat[k][p];
+             int minI = k, minJ = p;
+             int r = k + 1;
+             int f = p + 1;
+             if (r != n && f != m) {
+                 for (int s = r, d = f; s < n && d < m; s++, d++) {
+                     if (mat[s][d] < Min) {
+                         Min = mat[s][d];
+                         minI = s;
+                         minJ = d;
+                     }
+                 }
+             }
+             int tmp = mat[k][p];
+             mat[k][p] = mat[minI][minJ];
+             mat[minI][minJ] = tmp;
+             p = p + 1;
+             if (p == m) break;
+         }
+     }
+        if (m > 1) {
+            for (int j = 1; j < m - 1; j++) {
+                int p = 0;
+                for (int k = j; k < m; k++) {
+                    int Min = mat[p][k];
+                    int minI = p, minJ = k;
+                    int r = p + 1;
+                    int f = k + 1;
+                    if (r != n && f != m) {
+                        for (int s = r, d = f; s < n && d < m; s++, d++) {
+                            if (mat[s][d] < Min) {
+                                Min = mat[s][d];
+                                minI = s;
+                                minJ = d;
+                            }
+                        }
+                    }
+                    int tmp = mat[p][k];
+                    mat[p][k] = mat[minI][minJ];
+                    mat[minI][minJ] = tmp;
+                    p = p + 1;
+                    if (p == n) break;
+                }
+            }
+        }
+        return mat;
+    }
+}
