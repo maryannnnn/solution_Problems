@@ -1,0 +1,100 @@
+import java.io.IOException;
+import java.util.Scanner;
+
+public class ArrSolution15 {
+
+    public static void main(String[] args) throws IOException {
+
+        Scanner scanner = new Scanner(System.in);
+
+            int n = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            int m = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            int[][] arr = new int[n][m];
+
+            int k = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            for (int i = 0; i < n; i++) {
+
+                String[] inputArrStr = scanner.nextLine().split(" ");
+                scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+                for (int j = 0; j < m; j++) {
+                    int arrItem = Integer.parseInt(inputArrStr[j]);
+                    arr[i][j] = arrItem;
+                }
+            }
+
+
+        ArrSolution15 arrSolution15 = new ArrSolution15();
+
+        int[][] arrPrint = arrSolution15.matrixBlockSum(arr, k);
+
+        System.out.println();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print(arrPrint[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        scanner.close();
+
+
+    }
+
+    public int[][] matrixBlockSum(int[][] mat, int K) {
+        int[][] arr = new int[mat.length][mat[0].length];
+
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                arr[i][j] = sumMat(mat, i, j, K);
+            }
+        }
+
+        return arr;
+    }
+
+    public int sumMat(int[][] mat, int r, int c, int K) {
+        int sum = 0;
+        int left = c - K;
+        int right = c + K;
+        int top = r - K;
+        int bottom = r + K;
+
+        for (int i = r; i >= 0 && i >= top; i-- ) {
+                for (int j = c; j >= 0 && j >= left; j--) {
+                    sum = sum + mat[i][j];
+                }
+        }
+
+        if (c + 1 != mat[0].length) {
+            for (int i = r; i >= 0 && i >= top; i-- ) {
+                for (int j = c + 1; j < mat[0].length && j <= right; j++) {
+                    sum = sum + mat[i][j];
+                }
+            }
+        }
+
+        if (r + 1 != mat.length) {
+            for (int i = r + 1; i < mat.length && i <= bottom; i++) {
+                for (int j = c; j >= 0 && j >= left; j--) {
+                    sum = sum + mat[i][j];
+                }
+            }
+        }
+
+        if (r + 1 != mat.length && c + 1 != mat[0].length) {
+            for (int i = r + 1; i < mat.length && i <= bottom; i++) {
+                for (int j = c + 1; j < mat[0].length && j <= right; j++) {
+                    sum = sum + mat[i][j];
+                }
+            }
+        }
+    return sum;
+    }
+}
