@@ -1,0 +1,19 @@
+class Solution {
+    boolean result;
+    List<Integer> stackList = new ArrayList<>();
+ 
+    public boolean canReach(int[] arr, int start) {
+        if (arr[start] == 0) return true;
+        stackList.add(start);
+        if (arr.length == stackList.size()) return false;
+        int rihgtI = start + arr[start];
+        if (rihgtI <= arr.length - 1 && !stackList.contains(rihgtI)) {
+            result = canReach(arr, rihgtI);
+        }
+        int leftI = start - arr[start];
+        if (leftI >= 0 && !stackList.contains(leftI)) {
+            result = canReach(arr, leftI);
+        }
+    return result;
+    }
+}
