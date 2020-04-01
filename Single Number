@@ -1,0 +1,20 @@
+class Solution {
+ int point;
+    public int singleNumber(int[] nums) {
+        if (point + 1 != nums.length - 1) {
+            int tmpPoint = point + 1;
+            for(int i = tmpPoint; i < nums.length; i++) {
+                if (nums[point] == nums[i]) {
+                    int tmp = nums[i];
+                    nums[i] = nums[tmpPoint];
+                    nums[tmpPoint] = tmp;
+                    if (tmpPoint + 1 != nums.length) {
+                        point = ++tmpPoint;
+                        return singleNumber(nums);
+                    }
+                }
+            }
+        }
+        return nums[point];
+    }
+}
