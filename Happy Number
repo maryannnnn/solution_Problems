@@ -1,0 +1,29 @@
+class Solution {
+   List<Integer> numberList = new ArrayList<>();
+   
+    public boolean isHappy(int n) {
+        numberList.add(n);
+        int summ = 0;
+        String[] strNumber = Integer.toString(n).split("");
+        int[] arrInt = new int[strNumber.length];
+
+        for (int i = 0; i < strNumber.length; i++) {
+            arrInt[i] = Integer.parseInt(strNumber[i]);
+        }
+
+        for (int i = 0; i < arrInt.length; i++) {
+            summ += (int) Math.pow(arrInt[i], 2);
+        }
+
+//        System.out.println("summ: " + summ);
+        if (summ == 1) {
+            return true;
+        } else if (numberList.contains(summ)) {
+            return false;
+        } else {
+            return isHappy(summ);
+        }
+    }
+
+
+}
