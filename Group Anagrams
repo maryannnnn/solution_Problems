@@ -1,0 +1,48 @@
+class Solution {
+   
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> strList = new ArrayList<>();
+        int indAdd = 0;
+
+        for (String str: strs) {
+            indAdd = 0;
+               if (strList.size() != 0) {
+                for (List<String> elemList: strList) {
+                    if (checkAnagram(str, elemList.get(0))) {
+                        elemList.add(str);
+                        indAdd = 1;
+                    }
+                }
+                if (indAdd == 0) {
+                    List<String> tmp2List = new ArrayList<>();
+                    tmp2List.add(str);
+                    strList.add(tmp2List);
+                }
+            } else {
+                List<String> tmpList = new ArrayList<>();
+                tmpList.add(str);
+                strList.add(tmpList);
+            }
+        }
+     return strList;
+    }
+
+    public boolean checkAnagram(String strOne, String strTwo) {
+        if (strOne.length() == strTwo.length()) {
+            for (int i = 0; i < strOne.length(); i++ ) {
+                if(i == strOne.length() - 1) {
+                    String strKey = strOne.substring(i);
+                    if(strTwo.contains(strOne.substring(i))) {
+                        strTwo = strTwo.replaceFirst(strKey, "");
+                    } else return false;
+                } else {
+                    String strKey = strOne.substring(i, i + 1);
+                    if(strTwo.contains(strKey)) {
+                        strTwo = strTwo.replaceFirst(strKey, "");
+                    } else return false;
+                }
+            }
+            return true;
+        } else return false;
+    }
+}
