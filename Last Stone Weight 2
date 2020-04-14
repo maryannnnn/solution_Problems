@@ -1,0 +1,24 @@
+class Solution {
+    List<Integer> stoneList;
+
+    public int lastStoneWeight(int[] stones) {
+        if (stones.length == 1) return stones[0];
+        stoneList = new ArrayList<>();
+        for (int i = 0; i < stones.length; i++) stoneList.add(stones[i]);
+        serchStoune();
+        if (stoneList.isEmpty()) return 0;
+        else return stoneList.get(0);
+    }
+
+    public void serchStoune() {
+        Collections.sort(stoneList);
+        int indAdd = 0;
+        indAdd = stoneList.get(stoneList.size() - 1) - stoneList.get(stoneList.size() - 2);
+        stoneList.remove(stoneList.size() - 1);
+        stoneList.remove(stoneList.size() - 1);
+        if (indAdd > 0) stoneList.add(indAdd);
+        if (stoneList.size() > 1) {
+            serchStoune();
+        } else return;
+    }
+}
