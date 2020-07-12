@@ -1,0 +1,51 @@
+class Solution {
+    Map<String, String> mapCharOne = new HashMap<>();
+    Map<String, String> mapCharDou = new HashMap<>();
+
+    Solution() {
+
+        mapCharOne.put("1", "a");
+        mapCharOne.put("2", "b");
+        mapCharOne.put("3", "c");
+        mapCharOne.put("4", "d");
+        mapCharOne.put("5", "e");
+        mapCharOne.put("6", "f");
+        mapCharOne.put("7", "g");
+        mapCharOne.put("8", "h");
+        mapCharOne.put("9", "i");
+        mapCharDou.put("10#", "j");
+        mapCharDou.put("11#", "k");
+        mapCharDou.put("12#", "l");
+        mapCharDou.put("13#", "m");
+        mapCharDou.put("14#", "n");
+        mapCharDou.put("15#", "o");
+        mapCharDou.put("16#", "p");
+        mapCharDou.put("17#", "q");
+        mapCharDou.put("18#", "r");
+        mapCharDou.put("19#", "s");
+        mapCharDou.put("20#", "t");
+        mapCharDou.put("21#", "u");
+        mapCharDou.put("22#", "v");
+        mapCharDou.put("23#", "w");
+        mapCharDou.put("24#", "x");
+        mapCharDou.put("25#", "y");
+        mapCharDou.put("26#", "z");
+    }
+
+   public String freqAlphabets(String s) {
+
+        for (Map.Entry<String,String> elemStrDou: mapCharDou.entrySet()) {
+            if (s.contains(elemStrDou.getKey())) {
+                s = s.replaceAll(elemStrDou.getKey(), elemStrDou.getValue());
+            }
+        }
+
+        for (Map.Entry<String, String> elemStrOne: mapCharOne.entrySet()) {
+            if (s.contains(elemStrOne.getKey())) {
+                s = s.replaceAll(elemStrOne.getKey(), elemStrOne.getValue());
+            }
+        }
+
+     return s;
+    }
+}
