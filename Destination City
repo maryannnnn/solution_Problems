@@ -1,0 +1,16 @@
+class Solution {
+    public String destCity(List<List<String>> paths) {
+        String resultStr = "";
+
+        for (List<String> elemListStr: paths) {
+            int count = 0;
+            String strTmpTwo = elemListStr.get(1);
+            for (List<String> elemListStrDou: paths) {
+                if (strTmpTwo.equals(elemListStrDou.get(0))) count++;
+            }
+            if (count == 0) return strTmpTwo;
+            count = 0;
+        }
+    return resultStr;
+    }
+}
