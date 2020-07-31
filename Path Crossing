@@ -1,0 +1,29 @@
+public class Solution {
+
+    public boolean isPathCrossing(String path) {
+        Integer tmpX = 0;
+        Integer tmpY = 0;
+        List<Integer> startPair = new ArrayList();
+        startPair.add(0);
+        startPair.add(0);
+        List<List<Integer>> allPair = new ArrayList();
+        allPair.add(startPair);
+
+          for (int i = 0; i < path.length(); i++) {
+            if (path.charAt(i) == 'N') tmpX--;
+            if (path.charAt(i) == 'S') tmpX++;
+            if (path.charAt(i) == 'E') tmpY++;
+            if (path.charAt(i) == 'W') tmpY--;
+
+            for (List elem: allPair) {
+                if (elem.get(0).equals(tmpX) && elem.get(1).equals(tmpY))
+                    return true;
+            }
+            List<Integer> tmpListPair = new ArrayList<>();
+            tmpListPair.add(tmpX);
+            tmpListPair.add(tmpY);
+            allPair.add(tmpListPair);
+        }
+         return false;
+    }
+    }
