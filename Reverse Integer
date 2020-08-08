@@ -1,0 +1,24 @@
+class Solution {
+    public int reverse(int x) {
+        if (x == 0) return 0;
+        int y = x;
+        x = Math.abs(x);
+        int result = 0;
+        String intStr = String.valueOf(x);
+        String resultStr = new StringBuilder(intStr).reverse().toString();
+
+        while (resultStr.charAt(0) == '0' && resultStr.length() > 0) {
+            resultStr = resultStr.substring(1);
+        }
+
+        try {
+            result = Integer.parseInt(resultStr);
+        } catch (Exception e) {
+            return 0;
+        }
+       
+        if (y < 0) result = -1 * result;
+        return result;
+
+    }
+}
