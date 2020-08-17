@@ -1,0 +1,65 @@
+class Solution {
+
+
+    Map<Integer, List<Integer>> mapAll = new HashMap<>();
+    List<Integer> listAll = new ArrayList<>();
+    int ind = 0;
+
+    public List<Integer> largestDivisibleSubset(int[] nums) {
+        List<Integer> stack = new ArrayList<>();
+        List<Integer> resultStart = new ArrayList<>();
+        if (nums.length == 0 && ind == 0) {
+            ind++;
+            return resultStart;
+        }
+        if (nums.length == 1 && ind == 0) {
+            resultStart.add(nums[0]);
+            ind++;
+            return resultStart;
+        }
+        
+        Arrays.sort(nums);
+        int i = nums.length - 1;
+        int indCycl = 0;
+        int j = 0;
+
+        while (indCycl != 1) {
+            List<Integer> result = new ArrayList<>();
+            int indEmpty = 0;
+            int indStack = 0;
+            
+            for (j = i - 1; j >= 0; j--) {
+                if (nums[i] % nums[j] == 0 && !stack.contains(nums[j])) {
+                        if (indStack == 0) {
+                            stack.add(nums[j]);
+                            indStack++;
+                        }
+                        if (!result.contains(nums[i])){
+                            result.add(nums[i]);
+                        }
+                        if (!result.contains(nums[j])) {
+                            result.add(nums[j]);
+                        }
+                        i = j;
+                        indEmpty++;
+                        continue;
+                    }
+            }
+
+            if (indEmpty == 0) result.add(nums[i]);
+
+            mapAll.put(result.size(), result);
+            listAll.add(result.size());
+
+            i = nums.length - 1;
+            if (indStack == 0) indCycl = 1;
+        }
+
+        if (nums.length - 1 > 0) {
+            int[] arr = Arrays.copyOf(nums, nums.length - 1);
+            largestDivisibleSubset(arr);
+        }
+        Collections.sort(listAll);
+        return mapAll.get(listAll.get(listAll.size() - 1));
+    }
+}
