@@ -1,0 +1,57 @@
+class Solution {
+    public String sortString(String s) {
+
+        List<Character> sortList = new ArrayList<>();
+        for (int i = 0; i < s.length(); i++) {
+            sortList.add(s.charAt(i));
+        }
+
+        Collections.sort(sortList);
+
+        System.out.println(sortList);
+
+        StringBuilder strNew = new StringBuilder();
+
+        while (!sortList.isEmpty()) {
+                Character prev = null;
+            int index = 0;
+            for (int i = 0; i < sortList.size(); i++) {
+                if (prev == null) {
+                    index = 2;
+                } else if (sortList.get(i) > prev) {
+                    index = 1;
+                }
+                if (index == 2 || index == 1) {
+                    strNew.append(sortList.get(i));
+                    prev = sortList.get(i);
+                    sortList.remove(i);
+                        i--;
+                    index = 0;
+                }
+
+            }
+
+            Character next = null;
+            int index2 = 0;
+            for (int i = sortList.size() - 1; i >= 0; i--) {
+                if (next == null) {
+                    index2 = 2;
+                } else if (sortList.get(i) < next) {
+                    index2 = 1;
+                }
+                if (index2 == 2 || index2 == 1) {
+                    strNew.append(sortList.get(i));
+                    next = sortList.get(i);
+                    sortList.remove(i);
+                  //  i++;
+                    index2 = 0;
+                }
+            }
+        }
+
+    String rezult = new String(strNew);
+
+    return rezult;
+
+    }
+}
