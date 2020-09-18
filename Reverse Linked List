@@ -1,0 +1,61 @@
+public class Solution {
+
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) return head;
+        List<Integer> nodeList = new ArrayList<>();
+
+        nodeList.add(head.val);
+        while (head.next != null) {
+            head = head.next;
+            nodeList.add(head.val);
+        }
+        ListNode result = head;
+
+        head.val = nodeList.get(nodeList.size() - 1);
+        if (nodeList.size() - 1 > 0) {
+            for (int i = nodeList.size() - 2; i >=0 ; i--) {
+
+                head.next = new ListNode(nodeList.get(i));
+                head = head.next;
+            }
+        }
+        head.next = null;
+
+    return result;
+    }
+
+    public ListNode reverseList2(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode resultTmp = new ListNode(head.val, null);
+        head = head.next;
+        while (head.next != null) {
+
+            resultTmp = new ListNode(head.val, resultTmp);
+            head = head.next;
+        }
+        resultTmp = new ListNode(head.val, resultTmp);
+
+        return resultTmp;
+    }
+
+    public ListNode reverseList3(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode nextLinck = head;
+        head = head.next;
+        ListNode prevLinck = nextLinck;
+        prevLinck.next = null;
+
+        while (head.next != null) {
+            nextLinck = head;
+            head = head.next;
+            nextLinck.next = prevLinck;
+            prevLinck = nextLinck;
+        }
+        head.next = prevLinck;
+
+        return head;
+    }
+
+}
