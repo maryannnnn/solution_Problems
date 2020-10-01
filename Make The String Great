@@ -1,0 +1,62 @@
+public class Solution {
+    int indFinish;
+
+    public String makeGood(String s) {
+
+        indFinish = 0;
+        for (int i = 0; i < s.length() - 1; i++) {
+
+            if (i + 2 <= s.length() - 1) {
+                if ((s.substring(i, i + 1).equals(s.substring(i, i + 1).toLowerCase()) &&
+                        s.substring(i + 1, i + 2).equals(s.substring(i + 1, i + 2).toUpperCase())  &&
+                        s.substring(i, i + 1).toLowerCase().equals(s.substring(i + 1, i + 2).toLowerCase())) ||
+                        (s.substring(i, i + 1).equals(s.substring(i, i + 1).toUpperCase()) &&
+                                s.substring(i + 1, i + 2).equals(s.substring(i + 1, i + 2).toLowerCase())  &&
+                                s.substring(i, i + 1).toLowerCase().equals(s.substring(i + 1, i + 2).toLowerCase()))) {
+                    s = s.substring(0, i) + s.substring(i + 2);
+                    indFinish++;
+                }
+            } else if (i + 1 == s.length() - 1) {
+                if ((s.substring(i, i + 1).equals(s.substring(i, i + 1).toLowerCase()) &&
+                        s.substring(i + 1).equals(s.substring(i + 1).toUpperCase())  &&
+                        s.substring(i, i + 1).toLowerCase().equals(s.substring(i + 1).toLowerCase())) ||
+                        (s.substring(i, i + 1).equals(s.substring(i, i + 1).toUpperCase()) &&
+                                s.substring(i + 1).equals(s.substring(i + 1).toLowerCase())  &&
+                                s.substring(i, i + 1).toLowerCase().equals(s.substring(i + 1).toLowerCase()))) {
+                    s = s.substring(0, i) + s.substring(i + 2);
+                    indFinish++;
+                }
+            }
+        }
+        if (indFinish == 0 || s.isEmpty()) {
+            return s;
+        } else {
+            s = makeGood(s);
+        }
+        return s;
+    }
+
+    public String makeGood2(String s) {
+
+        indFinish = 0;
+        for (int i = 0; i < s.length() - 2; i++) {
+                if ((Character.isLowerCase(s.charAt(i)) &&
+                        Character.isUpperCase(s.charAt(i + 1)) &&
+                        Character.toLowerCase(s.charAt(i)) == Character.toLowerCase(s.charAt(i + 1))) ||
+                        (Character.isUpperCase(s.charAt(i)) &&
+                                Character.isLowerCase(s.charAt(i + 1)) &&
+                                Character.toLowerCase(s.charAt(i)) == Character.toLowerCase(s.charAt(i + 1)))
+                        ) {
+                    s = s.substring(0, i) + s.substring(i + 2);
+                    indFinish++;
+                }
+            }
+        if (indFinish == 0 || s.isEmpty()) {
+            return s;
+        } else {
+            s = makeGood(s);
+        }
+        return s;
+    }
+
+}
