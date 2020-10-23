@@ -12,4 +12,19 @@ class Solution {
         }
         return condList;
     }
+    
+        public List<Boolean> kidsWithCandies2(int[] candies, int extraCandies) {
+
+        List<Boolean> condList = new ArrayList<>();
+        int intMax = 0;
+        for (int i = 0; i < candies.length; i++) {
+            intMax = Math.max(intMax, candies[i]);
+        }
+
+        for (int i = 0; i < candies.length; i++) {
+            if (candies[i] + extraCandies >= intMax) condList.add(true);
+            else condList.add(false);
+        }
+        return condList;
+    }
 }
