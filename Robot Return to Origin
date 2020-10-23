@@ -1,0 +1,42 @@
+class Solution {
+    public boolean judgeCircle(String moves) {
+        int indX = 0;
+        int indY = 0;
+
+        for (int i = 0; i < moves.length(); i++) {
+            char tmp = moves.charAt(i);
+            if (tmp == 'R') {
+                indY++;
+            } else if (tmp == 'L') {
+                indY--;
+            } else if (tmp == 'U') {
+                indX--;
+            } else if (tmp == 'D') {
+                indX++;
+            }
+        }
+
+        return (indX == 0 && indY == 0) ? true : false;
+    }
+    
+    public boolean judgeCircle2(String moves) {
+        int indX = 0;
+        int indY = 0;
+
+        for (int i = 0; i < moves.length(); i++) {
+           
+            switch (moves.charAt(i)) {
+                case 'R' : indY++;
+                    break;
+                case 'L' : indY--;
+                    break;
+                case 'U' : indX--;
+                    break;
+                case 'D' : indX++;
+                    break;
+            }
+        }
+
+        return (indX == 0 && indY == 0) ? true : false;
+    }
+}
