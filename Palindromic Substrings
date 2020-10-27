@@ -1,6 +1,7 @@
 class Solution {
 
-  public int countSubstrings(String s) {
+
+    public int countSubstrings(String s) {
         int count = 0;
         for (int i = 0; i < s.length(); i++) {
             count++;
@@ -10,28 +11,22 @@ class Solution {
                 int t = i + 1;
                 while (j >= 0 && t < s.length() && (s.charAt(j) == s.charAt(t))) {
                     count++;
-
                     j--;
                     t++;
                 }
             }
-
-        }
-
-        for (int i = 0; i < s.length(); i++) {
 
             if (i + 1 < s.length()){
                 int j = i;
                 int t = i + 1;
                 while (j >= 0 && t < s.length() && (s.charAt(j) == s.charAt(t))) {
                     count++;
-
                     j--;
                     t++;
-
                 }
             }
         }
+
         return count;
     }
 
