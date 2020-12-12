@@ -1,0 +1,22 @@
+class Solution {
+    public List<String> commonChars(String[] A) {
+        List<String> strResult = new ArrayList<>();
+        String strData = A[0];
+           for (int i = 0; i < strData.length(); i++) {
+               int index = 0;
+               Character tmpChar = strData.charAt(i);
+               for (int j = 0; j < A.length; j++) {
+                   String strNext = A[j];
+                   if (strNext.indexOf(tmpChar) != -1) { 
+                       String strNew = strNext.replaceFirst(tmpChar.toString(), "");
+                       A[j] = strNew;
+                    } else {
+                       index = 1;
+                       break; 
+                   }
+               }
+               if (index == 0) strResult.add(tmpChar.toString());
+           }
+           return strResult;
+    }
+}
