@@ -1,0 +1,36 @@
+class Solution {
+    public int[] kWeakestRows(int[][] mat, int k) {
+        int result[] = new int[k];
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < mat.length; i++) {
+            int j = 0;
+            int sum = 0;
+            while (j < mat[0].length && mat[i][j] != 0) {
+                sum += mat[i][j];
+                j++;
+            }
+
+            map.put(i, sum);
+        }
+
+        System.out.println(map);
+
+        Map<Integer, Integer> sorted = map.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+
+
+        int t = 0;
+        for (Map.Entry<Integer, Integer> elem : sorted.entrySet()) {
+            result[t] = elem.getKey();
+            t++;
+            if (t == k) return result;
+            
+        }
+
+        return result;
+    }
+
+}
