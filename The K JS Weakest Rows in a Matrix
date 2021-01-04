@@ -1,0 +1,33 @@
+/**
+ * @param {number[][]} mat
+ * @param {number} k
+ * @return {number[]}
+ */
+var kWeakestRows = function(mat, k) {
+    let map = [];
+    let result = [];
+
+    for (let i = 0; i < mat.length; i++) {
+        let j = 0;
+        let sum = 0;
+        while (j < mat[0].length && mat[i][j] != 0) {
+            sum += mat[i][j];
+            j++;
+        }
+
+        map.push([i, sum]);
+      
+    }
+  
+    
+    
+    let sorted = map.sort((a, b) => a[1] - b[1]);
+    
+    let resultMap = sorted.slice(0, k);
+ 
+
+  for (let i = 0; i < resultMap.length; i++) {
+    result.push(resultMap[i][0]);
+  }
+    return result;
+}
