@@ -1,0 +1,17 @@
+class Solution {
+    public String interpret(String command) {
+        
+        String strGood = command.replaceAll("\\(\\)", "o");
+        return strGood.replaceAll("[()]", "");
+        
+    }
+}
+
+class Solution {
+    public String interpret(String command) {
+        
+        return command.replaceAll("\\(\\)", "o").replaceAll("[()]", "");
+       
+        
+    }
+}
