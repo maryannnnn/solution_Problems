@@ -1,0 +1,30 @@
+/**
+ * @param {number[]} arr
+ * @param {number[][]} pieces
+ * @return {boolean}
+ */
+var canFormArray = function(arr, pieces) {
+    
+            if (arr.length == 0 || pieces.length == 0) return false;
+              
+        for (let i = 0; i < pieces.length; i++) {
+            
+            for (let j = 0; j < pieces[i].length; j++) {
+   
+                if (arr.includes(pieces[i][j])) {
+    
+                    if (j > 0) {
+                        if (arr.indexOf(pieces[i][j]) - arr.indexOf(pieces[i][j - 1]) != 1) {
+                            return false;
+                        }
+                    }
+                 } else {
+                    return false;
+                } 
+                    
+            }
+        }
+        
+      return true;  
+    
+};
