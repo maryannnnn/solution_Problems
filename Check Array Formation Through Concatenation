@@ -1,0 +1,35 @@
+class Solution {
+    public boolean canFormArray(int[] arr, int[][] pieces) {
+        if (arr.length == 0 || pieces.length == 0) return false;
+        
+//         int sum = 0;
+//         for(int i = 0; i < pieces.length; i++) {
+//             sum += sum + pieces[i].length;
+//         }
+       
+//         if (arr.length != sum ) return false;
+        
+        List<Integer> arrlist = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++)  arrlist.add(arr[i]);
+                 
+        for (int i = 0; i < pieces.length; i++) {
+            
+            for (int j = 0; j < pieces[i].length; j++) {
+   
+                if (arrlist.contains(pieces[i][j])) {
+    
+                    if (j > 0) {
+                        if (arrlist.indexOf(pieces[i][j]) - arrlist.indexOf(pieces[i][j - 1]) != 1) {
+                            return false;
+                        }
+                    }
+                 } else {
+                    return false;
+                } 
+                    
+            }
+        }
+        
+      return true;  
+    }
+}
