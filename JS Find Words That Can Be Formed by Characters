@@ -1,0 +1,41 @@
+/**
+ * @param {string[]} words
+ * @param {string} chars
+ * @return {number}
+ */
+var countCharacters = function(words, chars) {
+    
+     let result = 0;
+        
+        for (let  i = 0; i < words.length; i++) {
+            let  ind = 0;
+            let  j = 0;
+           
+           let strWords = words[i];
+           let charsListTmp = chars;
+                              
+            while (j < strWords.length && ind != 1) {
+                                  
+                 let simbol = strWords[j];
+          //      console.log("simbol: " + simbol);
+                 
+               if(charsListTmp.includes(simbol)) {
+                 
+                 charsListTmp = charsListTmp.replace(simbol, "");
+          //     console.log("charsListTmp: " + charsListTmp);
+                   
+               } else {
+                   ind ++;
+               }
+                                
+                 j++;
+            }
+                  
+            if (ind == 0) {
+                result += strWords.length;
+            }
+        }
+        
+    return result;    
+ 
+};
