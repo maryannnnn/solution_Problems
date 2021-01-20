@@ -1,0 +1,37 @@
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        
+        int result = 0;
+        
+        for (int i = 0; i < words.length; i++) {
+            int ind = 0;
+            int j = 0;
+            String charsTmp = new String(chars);
+            String strWords = words[i];
+            String strSimbol = "";
+            while (j < strWords.length() && ind != 1) {
+                if (j != strWords.length() - 1)  {
+                    strSimbol = strWords.substring(j,j + 1);
+                } else {
+                    strSimbol = strWords.substring(j);
+                }
+               
+                if (charsTmp.contains(strSimbol)) {
+       //             System.out.println("strSimbol: " + strSimbol);
+                    charsTmp = charsTmp.replaceFirst(strSimbol, "");
+      //         System.out.println("chars: " + charsTmp);
+                } else {
+                    ind = 1;
+                }
+                 j++;
+            }
+        //    System.out.println("result: " + strWords.length());
+            
+            if (ind == 0) {
+                result += strWords.length();
+            }
+        }
+        
+    return result;    
+    }
+}
