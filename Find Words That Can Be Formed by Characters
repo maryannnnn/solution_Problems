@@ -35,3 +35,41 @@ class Solution {
     return result;    
     }
 }
+
+
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        
+        int result = 0;
+         List<Character> charsList = new ArrayList<>();
+        for(int i = 0; i < chars.length(); i++) charsList.add(chars.charAt(i));
+
+        for (int i = 0; i < words.length; i++) {
+            int ind = 0;
+            int j = 0;
+           
+             String strWords = words[i];
+           List<Character> charsListTmp = new ArrayList(charsList);
+             
+            while (j < strWords.length() && ind != 1) {
+                                  
+                 Character simbol = strWords.charAt(j);
+                 
+               if(charsListTmp.contains(simbol)) {
+                  charsListTmp.remove(simbol);
+  
+               } else {
+                   ind ++;
+               }
+                                
+                 j++;
+            }
+                  
+            if (ind == 0) {
+                result += strWords.length();
+            }
+        }
+        
+    return result;    
+    }
+}
