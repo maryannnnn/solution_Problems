@@ -1,0 +1,27 @@
+var sumOddLengthSubarrays = function(arr) {
+    
+    let sum = funcSumm(0, arr.length - 1, arr);
+    let arrTmp = [];
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if (!arrTmp.includes([i, j])) {
+                arrTmp.push([i, j]);
+                if ((j - i + 1) % 2 != 0) {
+                    sum += funcSumm(i, j, arr);
+                }
+            }
+            
+             
+        }
+    }
+
+    return sum;
+};
+
+var funcSumm = (i, j, arr) => {
+    sum = 0;
+    for (let k = i; k <= j; k++) {
+    sum += arr[k];
+    }
+    return sum;
+};
