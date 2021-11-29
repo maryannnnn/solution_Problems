@@ -1,0 +1,24 @@
+var merge = function(nums1, m, nums2, n) {
+           
+    for(let i = m; i < m + n; i++) {
+        nums1[i] = nums2[i - m];
+    }    
+    
+    return nums1.sort((a, b) => a - b);
+
+};
+
+
+var merge = function(nums1, m, nums2, n) {
+    
+    let arr1 = nums1.slice(0, m);
+    let arr2 = nums2.slice(0, n);
+    let array = arr1.concat(arr2);
+    let result = array.sort((a, b) => a - b);
+       
+    for(let i = 0; i < m + n; i++) nums1[i] = result[i];
+    
+    return nums1;
+
+};
+
