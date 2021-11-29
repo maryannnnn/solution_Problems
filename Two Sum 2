@@ -1,0 +1,27 @@
+var twoSum = function(nums, target) {
+    
+    for(let i = 0; i < nums.length - 1; i++) {
+      let p = i + 1;  
+        for(let j = p; j < nums.length; j++) {
+            if(nums[i] + nums[j] === target) {
+                  let result = [i, j];
+                  return result;
+            } 
+        } 
+    
+    }
+    
+};
+
+
+var twoSum = function(nums, target) {
+    
+    for(let i = 0; i < nums.length; i++) {
+      let razn = target - nums[i]; 
+      let index = nums.indexOf(razn);
+            if(nums.includes(razn) && (i !== index)) {
+                let result = [i, index];
+                return result;
+            }
+      }
+};
