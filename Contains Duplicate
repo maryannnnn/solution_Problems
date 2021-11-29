@@ -1,0 +1,9 @@
+var containsDuplicate = function(nums) {
+   
+    let setArr = new Set(nums);
+    if(setArr.size !== nums.length) {
+        return true;
+    } else {
+        return false;
+    }
+};
