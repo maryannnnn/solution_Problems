@@ -1,0 +1,49 @@
+var maxProfit = function(prices) {
+    
+    let max = -Number.MAX_VALUE;
+    let indexMax = 0;
+    let min = Number.MAX_VALUE;
+    let indexMin = 0;
+    let start = 0;
+    let arrResult = [];
+    
+while(start !== prices.length) {
+   for(let i = start; i < prices.length; i++) {
+        
+        if(prices[i] > max) {
+            max = prices[i];
+            indexMax = i;
+        }
+        
+    }
+    
+    min = max;
+    
+    for(let j = start; j < indexMax; j++) {
+        
+        if(prices[j] < min) {
+            min = prices[j];
+            indexMin = j;
+        }
+        
+    }
+    
+    let result = max - min;
+    
+    arrResult.push(result);
+    
+   
+    if(indexMax < prices.length) {
+        start = ++indexMax;
+        max = -Number.MAX_VALUE;
+        min = Number.MAX_VALUE;
+        indexMin = start;
+    } 
+    
+}
+    
+        arrResult.sort((a, b) => a - b);
+    
+        return arrResult[arrResult.length - 1];
+    
+};
