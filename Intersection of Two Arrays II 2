@@ -1,0 +1,40 @@
+var intersect = function(nums1, nums2) {
+    let result = [];
+    let tmp1 = [];
+    let tmp2 = [];
+    for(let i = 0; i < nums1.length; i++) {
+        for(let j = 0; j < nums2.length; j++) {
+            if(nums1[i] === nums2[j]) {
+                
+                if(!tmp2.includes(j) && !tmp1.includes(i)) {
+                result.push(nums1[i]);
+                tmp2.push(j);
+                tmp1.push(i);
+           
+                }
+            }
+        }
+    }
+    return result;
+};
+
+var intersect = function(nums1, nums2) {
+    let result = [];
+    let map = new Map();
+
+    for(let i = 0; i < nums1.length; i++) {
+     a: for(let j = 0; j < nums2.length; j++) {
+            if(nums1[i] === nums2[j]) {
+                
+             
+                    if(!map.has(i) && ([...map.values()].includes(j) === false)) {
+                      result.push(nums1[i]);
+                       map.set(i, j); 
+                    }
+        
+                
+            }
+        }
+    }
+    return result;
+};
