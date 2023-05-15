@@ -1,0 +1,91 @@
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    const commonPrefix = ""
+    const shortestString = strs.reduce((a, b) => a.length < b.length ? a : b)
+    console.log("shortestString", shortestString)
+    const arr = []
+    let ind  
+    let indexArr = 0
+    for (let i = 0; i < shortestString.length; i++) {
+        let j = i + 1
+        for (j; j <= shortestString.length; j++) {
+        const strTmp = shortestString.slice(i, j) 
+        console.log("strTmp", strTmp)
+        ind = 0
+        
+        for (let el of strs) {
+            if(el.includes(strTmp)) {
+                console.log("el.includes(shortestString.substring(i, j)", el.includes(strTmp))
+                ind++
+            } 
+        }
+        if(ind === strs.length) {
+        arr.push({key: strTmp.length, value: strTmp, index: indexArr})
+        indexArr++
+        }  
+     }
+    }
+
+    console.log("arr", arr);
+
+    if(arr.length === 0) return ""
+    if(arr.length === 1) return arr[0].value
+    const elementSort = arr.sort((item1, item2) => item2.key - item1.key)
+    console.log("elementSort", elementSort);
+    const elementMaxAll = elementSort.filter((element) => element.key === elementSort[0].key )
+    console.log("elementMaxAll", elementMaxAll);
+    if(elementMaxAll.length === 1) return elementMaxAll[0].value
+    const elementMax = elementMaxAll.sort((el1, el2) => el1.index - el2.index)
+    console.log("elementMax", elementMax);
+    return elementMax[0].value
+};
+
+
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    const shortestString = strs.reduce((a, b) => a.length < b.length ? a : b)
+    const arr = []
+    let ind  
+    for (let i = 1; i <= shortestString.length; i++) {
+        const strTmp = shortestString.slice(0, i) 
+        ind = 0
+        for (let el of strs) {
+            if(el.startsWith(strTmp)) {
+                ind++
+            } 
+        }
+        if(ind === strs.length) {
+        arr.push({key: strTmp.length, value: strTmp})
+        }  
+    }
+    if(arr.length === 0) return ""
+    const elementSort = arr.sort((item1, item2) => item2.key - item1.key)
+    return elementSort[0].value
+};
+
+
+var longestCommonPrefix = function(strs) {
+  if (strs.length === 0) {
+    return "";
+  }
+  
+  let prefix = strs[0];
+  
+  for (let i = 1; i < strs.length; i++) {
+    while (strs[i].indexOf(prefix) !== 0) {
+      prefix = prefix.slice(0, prefix.length - 1);
+      if (prefix === "") {
+        return "";
+      }
+    }
+  }
+  
+  return prefix;
+};
+
