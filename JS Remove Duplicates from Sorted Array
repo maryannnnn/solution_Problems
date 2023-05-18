@@ -1,0 +1,27 @@
+
+var removeDuplicates = function(nums) {
+  const numsSet = new Set(nums);
+  const numsArray = Array.from(numsSet).sort(((a, b) => a - b));
+  for(let i = 0; i < numsArray.length; i++) {
+      nums[i] = numsArray[i]
+  }
+  return numsArray.length;
+};
+
+
+var removeDuplicates = function(nums) {
+  if (nums.length === 0) {
+    return 0;
+  }
+  
+  let i = 0; // Указатель для записи уникальных элементов
+  
+  for (let j = 1; j < nums.length; j++) {
+    if (nums[j] !== nums[i]) {
+      i++;
+      nums[i] = nums[j]; // Записываем уникальный элемент на новую позицию
+    }
+  }
+  
+  return i + 1; // Возвращаем количество уникальных элементов
+};
