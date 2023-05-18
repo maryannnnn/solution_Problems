@@ -1,0 +1,48 @@
+var isPalindrome = function(x) {
+    const strX = x.toString()
+    let reversedStr = strX.split('').reverse().join('')
+    if(strX === reversedStr) return true
+        else return false
+};
+
+
+const isPalindrome = function(x) {
+    // Преобразуем число в строку
+    const str = String(x);
+    
+    // Используем два указателя для сравнения символов с обоих концов строки
+    let left = 0;
+    let right = str.length - 1;
+    
+    while (left < right) {
+        // Если символы не совпадают, число не является палиндромом
+        if (str[left] !== str[right]) {
+            return false;
+        }
+        
+        // Переходим к следующим символам
+        left++;
+        right--;
+    }
+    
+    // Все символы совпадают, число является палиндромом
+    return true;
+};
+
+
+var isPalindrome = function(x) {
+    if (x < 0 || (x !== 0 && x % 10 === 0)) {
+        return false;
+    }
+
+    let original = x;
+    let reversed = 0;
+
+    while (x > 0) {
+        reversed = reversed * 10 + (x % 10);
+        x = Math.floor(x / 10);
+    }
+
+    return original === reversed;
+};
+
