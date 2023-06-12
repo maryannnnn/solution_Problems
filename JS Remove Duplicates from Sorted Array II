@@ -1,0 +1,22 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+
+    let j = 0
+    const mapNumber = new Map()
+
+    for(let el of nums) {
+        if(!mapNumber.has(el)) {
+            mapNumber.set(el, 1)
+            nums[j] = el
+            j++
+        } else if(mapNumber.get(el) === 1) {
+            mapNumber.set(el, 2)
+            nums[j] = el
+            j++
+        }
+    }
+    return j
+};
