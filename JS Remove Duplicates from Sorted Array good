@@ -1,0 +1,17 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    let j = 0
+    const setNumber = new Set()
+
+    for(let i = 0; i < nums.length; i++) {
+        if(!setNumber.has(nums[i])) {
+            setNumber.add(nums[i])
+            nums[j] = nums[i] 
+            j++
+        }
+    }
+return j
+};
