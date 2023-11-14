@@ -1,0 +1,31 @@
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+           
+        let maxStringLength = 0;
+        let maxString = ''; 
+            
+        for(let i = 0; i < s.length; i++) {
+            for(let j = i; j < s.length; j++) {
+                let tmpStr = s.substring(i, j + 1);
+                if( chackPolndromic(tmpStr) ) {
+                    if(tmpStr.length > maxStringLength) {
+                        maxStringLength = tmpStr.length;
+                        maxString = tmpStr;
+                    }
+                }
+            }
+             
+        }
+        return maxString;
+}
+    
+const chackPolndromic = (s) => {
+        
+    for(let i = 0; i < Math.floor(s.length / 2); i++) {
+        if(s[i] !== s[s.length -1 - i]) return false;
+    }
+    return true;
+}
